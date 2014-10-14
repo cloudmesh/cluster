@@ -5,11 +5,10 @@ log = LOGGER(__file__)
 
 
 class cm_shell_cluster:
-
-    """opt_example class"""
+    """Creating a virtual cluster"""
 
     def activate_cm_shell_cluster(self):
-        self.register_command_topic('cloud','cluster')
+        self.register_command_topic('cloud', 'cluster')
         pass
 
     @command
@@ -18,7 +17,7 @@ class cm_shell_cluster:
         Usage:
             cluster create NAME WORKERS CLOUD
             cluster info [NAME]
-            cluster delete [-f] [NAME] 
+            cluster delete [-f] [NAME]
             cluster clean
 
         Manages a virttual cluster on a cloud
@@ -45,21 +44,21 @@ class cm_shell_cluster:
             log.info("delete the cluster '{NAME}'".format(**arguments))
             return
         elif arguments["delete"]:
-            log.info("delete all the clusters".format(**arguments))        
+            log.info("delete all the clusters")
             return
-            
+
         if arguments["info"] and arguments["NAME"]:
             log.info("info of cluster {NAME}".format(**arguments))
             return
         elif arguments["info"]:
-            log.info("info of all clusters".format(**arguments))        
+            log.info("info of all clusters")
             return
-        
+
         if arguments["list"] and arguments["NAME"]:
             log.info("list of cluster {NAME}".format(**arguments))
             return
         elif arguments["list"]:
-            log.info("list of all clusters".format(**arguments))        
+            log.info("list of all clusters")
             return
-        
+
         return
