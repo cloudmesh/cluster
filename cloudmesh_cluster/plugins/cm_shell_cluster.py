@@ -15,10 +15,14 @@ class cm_shell_cluster:
     def do_cluster(self, args, arguments):
         """
         Usage:
-            cluster create NAME WORKERS CLOUD
+            cluster create NAME WORKERS CLOUD [--image=IMAGE] [--flavor=FLAVOR]
             cluster info [NAME]
+            cluster status [NAME]            
             cluster delete [-f] [NAME]
             cluster clean
+            cluster checkpoint NAME
+            cluster restore NAME
+            cluster list
 
         Manages a virttual cluster on a cloud
 
