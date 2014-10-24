@@ -85,13 +85,15 @@ class cm_shell_cluster:
         log.info(arguments)
 
 
-
         if arguments["clean"]:
 
             log.info("clean the vm")
 
             return
 
+
+        if arguments["create"] and arguments["NAME"] and arguments["WORKERS"] and arguments["CLOUD"]:
+           virtual_cluster().create("{NAME}".format(**arguments),"{WORKERS}".format(**arguments),"{CLOUD}".format(**arguments),"{--image}".format(**arguments),"{--flavor}".format(**arguments))
 
 
         if arguments["delete"] and arguments["NAME"]:
@@ -103,6 +105,7 @@ class cm_shell_cluster:
             return
 
         elif arguments["delete"]:
+            print arguments
 
             virtual_cluster().delete_all()
 
