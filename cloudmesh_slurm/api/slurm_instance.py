@@ -1,7 +1,7 @@
 from cloudmesh.config.cm_config import get_mongo_db, DBConnFactory
 from mongoengine import *
 
-class VirtualCluster(Document):
+class VirtualSlurm(Document):
     vuser = StringField(required=True)
     vname = StringField(required=True)
     vworkers = IntField()

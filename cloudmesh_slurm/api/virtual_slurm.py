@@ -2,7 +2,7 @@ import cloudmesh
 from cloudmesh_common.logger import LOGGER
 from cloudmesh.cm_mongo import cm_mongo
 #from cloudmesh.config.cm_config import get_mongo_db
-from cloudmesh_cluster.api.cluster_instance import VirtualCluster
+from cloudmesh_slurm.api.slurm_instance import VirtualSlurm
 
 '''collection = "cloudmesh"
 dbconn = get_mongo_db(collection)
@@ -14,26 +14,26 @@ cloudmanage = cloudmesh.iaas.cm_cloud.CloudManage()
 mesh = cloudmesh.mesh("mongo")
 #mesh.activate(username)
 
-class virtual_cluster:
+class virtual_slurm:
       
    def delete (self, name):
         print username
         print "delete {0}".format(name)
-        log.info("VM CLUSTER: delete {0}".format(name))
+        log.info("VM SLURM: delete {0}".format(name))
         vclock.start(username)
         pass
    
    def delete_all (self):
         print username
         print "delete all"
-        log.info("VM CLUSTER: delete all")
+        log.info("VM SLURM: delete all")
         print vclock.get(username)
         pass
    
    def info (self, name):
         print username
         print "info {0}".format(name)
-        for vc in VirtualCluster.objects:
+        for vc in VirtualSlurm.objects:
             print "cloud {0} workers {1}".format(vc.vcloud,vc.vworkers)
         '''#vclock.stop(username)
         satest={"name" : "tester", "text":"my first document"}
@@ -53,7 +53,7 @@ class virtual_cluster:
         images = mesh.images(clouds=[cloud],cm_user_id=username)
         if image in images[cloud]:
            print image
-        VirtualCluster(vuser=username,
+        VirtualSlurm(vuser=username,
                        vname=name,
                        vworkers=workers,
                        vcloud=cloud,

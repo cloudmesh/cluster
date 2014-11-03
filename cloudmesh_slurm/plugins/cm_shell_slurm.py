@@ -1,19 +1,19 @@
 from cmd3.shell import command
 from cloudmesh_common.logger import LOGGER
 import cloudmesh
-from cloudmesh_cluster.api.virtual_cluster import virtual_cluster
+from cloudmesh_slurm.api.virtual_slurm import virtual_slurm
 
 log = LOGGER(__file__)
 
-class cm_shell_cluster:
+class cm_shell_slurm:
     """Creating a virtual cluster"""
 
-    def activate_cm_shell_cluster(self):
+    def activate_cm_shell_slurm(self):
         self.register_command_topic('cloud', 'cluster')
         pass
 
     @command
-    def do_cluster(self, args, arguments):
+    def do_slurm(self, args, arguments):
         """
         Usage:
             cluster create NAME WORKERS CLOUD [--image=IMAGE] [--flavor=FLAVOR]
@@ -47,7 +47,7 @@ class cm_shell_cluster:
             arguments["NAME"] and
             arguments["WORKERS"] and
             arguments["CLOUD"]):
-           virtual_cluster().create("{NAME}".format(**arguments),
+           virtual_slurm().create("{NAME}".format(**arguments),
                                     "{WORKERS}".format(**arguments),
                                     "{CLOUD}".format(**arguments),
                                     "{--image}".format(**arguments),
@@ -55,23 +55,23 @@ class cm_shell_cluster:
 
 
         if arguments["delete"] and arguments["NAME"]:
-            virtual_cluster().delete("{NAME}".format(**arguments))
+            virtual_slurm().delete("{NAME}".format(**arguments))
             log.info("delete the cluster '{NAME}'".format(**arguments))
             return
 
         elif arguments["delete"]:
             print arguments
-            virtual_cluster().delete_all()
+            virtual_slurm().delete_all()
             log.info("delete all the clusters")
             return
 
         if arguments["info"] and arguments["NAME"]:
-            virtual_cluster().info("{NAME}".format(**arguments))
+            virtual_slurm().info("{NAME}".format(**arguments))
             log.info("info of cluster {NAME}".format(**arguments))
             return
 
         elif arguments["info"]:
-            virtual_cluster().info_all()
+            virtual_slurm().info_all()
             log.info("info of all clusters")
             return
 
