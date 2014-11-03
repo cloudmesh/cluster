@@ -26,7 +26,7 @@ class InstallFancy(install):
 
 
 setup(
-    name='cloudmesh_cluster',
+    name='cloudmesh_slurm',
     version=__import__('cloudmesh').version(),
     description='An add on to cloudmesh to manage a virtual clouster on cloud environments',
     # description-file =
