@@ -2,7 +2,7 @@ from __future__ import print_function
 import cloudmesh
 from cloudmesh_common.logger import LOGGER
 from cloudmesh.cm_mongo import cm_mongo
-#from cloudmesh.config.cm_config import get_mongo_db
+# from cloudmesh.config.cm_config import get_mongo_db
 from cloudmesh_cluster.api.cluster_instance import VirtualCluster
 from subprocess import call
 
@@ -21,12 +21,12 @@ class virtual_cluster:
         print ("deleted {name}".format(name=name))
         for myvc in VirtualCluster.objects(user=username, name=name):
             servers = myvc.servers
-            #print servers
+            # print servers
             for i, server in enumerate(servers):
                 mesh.delete(myvc.cloud, server, username)
             myvc.delete()
         log.info("VM CLUSTER: delete {0}".format(name))
-        #vclock.start(username)
+        # vclock.start(username)
         pass
 
     def delete_all(self):
@@ -37,7 +37,7 @@ class virtual_cluster:
                 mesh.delete(myvc.cloud, server, username)
             myvc.delete()
         log.info("VM CLUSTER: delete all of {user}".format(user=username))
-        #print vclock.get(username)
+        # print vclock.get(username)
         pass
 
     def info(self, name):
@@ -51,21 +51,27 @@ class virtual_cluster:
                                        vc.workers,
                                        vc.image,
                                        vc.flavor)
-        '''#vclock.stop(username)
-        satest={"name" : "tester", "text":"my first document"}
-        # print dbconn.insert(satest)
-        # print dbconn.find_one({"name" : "tester"})
-        for item in dbconn.find():
-            print item'''
+        #
+        # # vclock.stop(username)
+        #  satest={"name" : "tester", "text":"my first document"}
+        # #  print dbconn.insert(satest)
+        # #  print dbconn.find_one({"name" : "tester"})
+        #  for item in dbconn.find():
+        #     print item
         pass
 
     def info_all(self):
         for vc in VirtualCluster.objects:
-            print "name= {0} cloud= {1} workers= {2} image={3} flavor={4}".format(vc.name, vc.cloud, vc.workers, vc.image, vc.flavor)
+            print("name= {0} cloud= {1} "
+                  "workers= {2} image={3} flavor={4}".format(vc.name,
+                                                             vc.cloud,
+                                                             vc.workers,
+                                                             vc.image,
+                                                             vc.flavor))
         pass
 
     def list_clusters(self):
-        #call(["ls","-alrt"])
+        # call(["ls","-alrt"])
         for vc in VirtualCluster.objects:
             print "{0}".format(vc.name)
         pass
@@ -111,26 +117,31 @@ class virtual_cluster:
                                     cm_user_id=username,
                                     flavor=vc_flavor,
                                     image=vc_image)
-            #print result
+            # print result
             server = result['server']['id']
-            #print server
+            # print server
             myvc.servers.append(server)
             ip = mesh.assign_public_ip(vc_cloud, server, username)
             myvc.ips.append(ip)
             myvc.save()
-        '''for serverid in mesh.servers(clouds=["india"],cm_user_id=username)["india"].keys():
-            server =  mesh.servers(clouds=["india"],cm_user_id=username)["india"][serverid]
+        '''for serverid in mesh.servers(clouds=["india"],
+                   cm_user_id=username)["india"].keys():
+            server =  mesh.servers(clouds=["india"],
+            cm_user_id=username)["india"][serverid]
             print server['name']'''
+
+
+        data = {n: vc_name,
+                w: vc_workers,
+                c: vc_cloud,
+                i: vc_image,
+                f: vc_flavor}
+            
         print ("create name={n} workers={w} "
-               "cloud={c} image={i} flavor={f}".format(n=vc_name,
-                                                       w=vc_workers,
-                                                       c=vc_cloud,
-                                                       i=vc_image,
-                                                       f=vc_flavor))
+               "cloud={c} image={i} flavor={f}".format(**data))
         # for mycloud in cloudmanage.get_clouds(username):
         #     print mycloud['cm_cloud']
         # for myimage in cloudmanage.get_images(True):
         #     print myimage['name']
         # if mycloud in cloudmanage.get_coulds(username)
         pass
-
