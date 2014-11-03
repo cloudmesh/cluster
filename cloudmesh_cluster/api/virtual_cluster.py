@@ -53,11 +53,20 @@ class virtual_cluster:
         images = mesh.images(clouds=[cloud],cm_user_id=username)
         if image in images[cloud]:
            print image
-        VirtualCluster(vuser=username , vname=name , vworkers=workers, vcloud=cloud, vimage=image, vflavor=flavor).save()
+        VirtualCluster(vuser=username,
+                       vname=name,
+                       vworkers=workers,
+                       vcloud=cloud,
+                       vimage=image,
+                       vflavor=flavor).save()
         '''for serverid in mesh.servers(clouds=["india"],cm_user_id=username)["india"].keys():
             server =  mesh.servers(clouds=["india"],cm_user_id=username)["india"][serverid]
             print server['name']'''
-        print "create name={n} workers={w} cloud={c} image={i} flavor={f}".format(n=name,w=workers,c=cloud,i=image,f=flavor)
+        print "create name={n} workers={w} cloud={c} image={i} flavor={f}".format(n=name,
+                                                                                  w=workers,
+                                                                                  c=cloud,
+                                                                                  i=image,
+                                                                                  f=flavor)
         #for mycloud in cloudmanage.get_clouds(username):
         #    print mycloud['cm_cloud']
         #for myimage in cloudmanage.get_images(True):
