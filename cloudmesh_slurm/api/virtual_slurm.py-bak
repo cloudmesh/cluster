@@ -18,6 +18,7 @@ class virtual_slurm:
       
    def delete (self, name):
         print username
+        jbk
         print "delete {0}".format(name)
         log.info("VM SLURM: delete {0}".format(name))
         vclock.start(username)
