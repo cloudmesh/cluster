@@ -31,7 +31,7 @@ class virtual_slurm:
 
     def delete_all(self):
         print ("deleted all clusters of {user}".format(user=username))
-        for myvc in VirtualCluster.objects(user=username):
+        for myvc in VirtualSlurm.objects(user=username):
             servers = myvc.servers
             for i, server in enumerate(servers):
                 mesh.delete(myvc.cloud, server, username)
@@ -50,7 +50,9 @@ class virtual_slurm:
                                        vc.cloud,
                                        vc.workers,
                                        vc.image,
-                                       vc.flavor)
+                                       vc.flavor))
+        pass
+
         #
         # # vclock.stop(username)
         #  satest={"name" : "tester", "text":"my first document"}
@@ -58,7 +60,7 @@ class virtual_slurm:
         # #  print dbconn.find_one({"name" : "tester"})
         #  for item in dbconn.find():
         #     print item
-        pass
+        # pass
 
     def info_all(self):
         for vc in VirtualSlurm.objects:
@@ -73,7 +75,7 @@ class virtual_slurm:
     def list_clusters(self):
         # call(["ls","-alrt"])
         for vc in VirtualSlurm.objects:
-            print "{0}".format(vc.name)
+            print("{0}").format(vc.name)
         pass
 
     def defaults(self, name, workers, cloud, image, flavor):
@@ -85,7 +87,7 @@ class virtual_slurm:
     def create(self, vc_name, vc_workers, vc_cloud, vc_image, vc_flavor):
         clouds = cloudmesh.load().cloudnames()
         if vc_cloud not in clouds:
-            print "cloud {c} does not exit".format(c=vc_cloud)
+            print("cloud {c} does not exit".format(c=vc_cloud))
             return
         flavors = mesh.flavors(cm_user_id=username, clouds=[vc_cloud])
         vc_flavor_flag = True
@@ -93,7 +95,7 @@ class virtual_slurm:
             if vc_flavor == key["name"]:
                 vc_flavor_flag = False
         if vc_flavor_flag  and vc_flavor != "None":
-            print "flavor {f} does not exit".format(f=vc_flavor)
+            print("flavor {f} does not exit".format(f=vc_flavor))
             return
         images = mesh.images(clouds=[vc_cloud], cm_user_id=username)
         vc_image_flag = True
@@ -101,9 +103,9 @@ class virtual_slurm:
             if vc_image == key["name"]:
                 vc_image_flag = False
         if vc_image_flag and vc_image != "None":
-            print "image {i} does not exit".format(i=vc_image)
+            print("image {i} does not exit".format(i=vc_image))
             return
-        myvc = VirtualCluster(user=username,
+        myvc = VirtualSlurm(user=username,
                               name=vc_name,
                               workers=vc_workers,
                               cloud=vc_cloud,
@@ -129,16 +131,14 @@ class virtual_slurm:
             server =  mesh.servers(clouds=["india"],
             cm_user_id=username)["india"][serverid]
             print server['name']'''
-
-
-        data = {n: vc_name,
-                w: vc_workers,
-                c: vc_cloud,
-                i: vc_image,
-                f: vc_flavor}
+        
             
-        print ("create name={n} workers={w} "
-               "cloud={c} image={i} flavor={f}".format(**data))
+        print ("create name={0}workers={1} "
+               "cloud={2} image={3} flavor={4}".format(vc_name,
+                                                       vc_workers,
+                                                       vc_cloud,
+                                                       vc_image,
+                                                       vc_flavor))
         # for mycloud in cloudmanage.get_clouds(username):
         #     print mycloud['cm_cloud']
         # for myimage in cloudmanage.get_images(True):

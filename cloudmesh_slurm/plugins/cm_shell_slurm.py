@@ -51,47 +51,47 @@ class cm_shell_slurm:
             arguments["NAME"] and
             arguments["WORKERS"] and
             arguments["CLOUD"]):
-           virtual_slurm_cluster().defaults("{NAME}".format(**arguments),
+            virtual_slurm().defaults("{NAME}".format(**arguments),
                                       "{WORKERS}".format(**arguments),
                                       "{CLOUD}".format(**arguments),
                                       "{--image}".format(**arguments),
                                       "{--flavor}".format(**arguments))
-           return
+            return
 
         if (arguments["create"] and
             arguments["NAME"] and
             arguments["WORKERS"] and
             arguments["CLOUD"]):
-           virtual_slurm_cluster().create("{NAME}".format(**arguments),
+            virtual_slurm().create("{NAME}".format(**arguments),
                                     "{WORKERS}".format(**arguments),
                                     "{CLOUD}".format(**arguments),
                                     "{--image}".format(**arguments),
                                     "{--flavor}".format(**arguments))
-           return
+            return
         elif arguments["create"]:
-           virtual_slurm_cluster().create_defaults()
-           return
+            virtual_slurm().create_defaults()
+            return
 
         if arguments["delete"] and arguments["NAME"]:
-            virtual_slurm_cluster().delete("{NAME}".format(**arguments))
+            virtual_slurm().delete("{NAME}".format(**arguments))
             log.info("delete the slurm cluster '{NAME}'".format(**arguments))
             return
         elif arguments["delete"]:
-            virtual_slurm_cluster().delete_all()
+            virtual_slurm().delete_all()
             log.info("delete all the slurm clusters")
             return
 
         if arguments["info"] and arguments["NAME"]:
-            virtual_slurm_cluster().info("{NAME}".format(**arguments))
+            virtual_slurm().info("{NAME}".format(**arguments))
             log.info("info of slurm cluster {NAME}".format(**arguments))
             return
         elif arguments["info"]:
-            virtual_slurm_cluster().info_all()
+            virtual_slurm().info_all()
             log.info("info of all slurm clusters")
             return
 
         if arguments["list"]:
-            virtual_slurm_cluster().list_clusters()
+            virtual_slurm().list_clusters()
             log.info("list of all slurm clusters")
             return
 

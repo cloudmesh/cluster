@@ -35,11 +35,11 @@ class cm_shell_hadoop:
         """
         log.info(arguments)
 
-        if (arguments["create"] and
-            arguments["NAME"]
-            and arguments["DATANODE"]) :
-            virtual_hadoop_cluster().create("{NAME}".format(**arguments),
-                                            "{DATANODDES}".format(**arguments))
+        if (arguments["create"] 
+            and arguments["NAME"]
+            and arguments["DATANODES"]):
+            virtual_hadoop().create("{NAME}".format(**arguments),
+                                            "{DATANODES}".format(**arguments))
             return
 
         return
