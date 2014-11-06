@@ -3,7 +3,7 @@ import cloudmesh
 from cloudmesh_common.logger import LOGGER
 from cloudmesh.cm_mongo import cm_mongo
 # from cloudmesh.config.cm_config import get_mongo_db
-from cloudmesh_cluster.api.cluster_instance import VirtualCluster
+from cloudmesh_slurm.api.slurm_instance import VirtualSlurm
 from subprocess import call
 
 '''collection = "cloudmesh"
@@ -16,10 +16,10 @@ cloudmanage = cloudmesh.iaas.cm_cloud.CloudManage()
 mesh = cloudmesh.mesh("mongo")
 mesh.activate(username)
 
-class virtual_cluster:
+class virtual_slurm:
     def delete(self, name):
         print ("deleted {name}".format(name=name))
-        for myvc in VirtualCluster.objects(user=username, name=name):
+        for myvc in VirtualSlurm.objects(user=username, name=name):
             servers = myvc.servers
             # print servers
             for i, server in enumerate(servers):
@@ -41,7 +41,7 @@ class virtual_cluster:
         pass
 
     def info(self, name):
-        for vc in VirtualCluster.objects(name=name):
+        for vc in VirtualSlurm.objects(name=name):
             print ("name= {0} "
                    "cloud= {1} "
                    "workers= {2} "
@@ -61,7 +61,7 @@ class virtual_cluster:
         pass
 
     def info_all(self):
-        for vc in VirtualCluster.objects:
+        for vc in VirtualSlurm.objects:
             print("name= {0} cloud= {1} "
                   "workers= {2} image={3} flavor={4}".format(vc.name,
                                                              vc.cloud,
@@ -72,7 +72,7 @@ class virtual_cluster:
 
     def list_clusters(self):
         # call(["ls","-alrt"])
-        for vc in VirtualCluster.objects:
+        for vc in VirtualSlurm.objects:
             print "{0}".format(vc.name)
         pass
 

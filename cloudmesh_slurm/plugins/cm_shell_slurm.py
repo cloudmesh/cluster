@@ -1,7 +1,7 @@
 from cmd3.shell import command
 from cloudmesh_common.logger import LOGGER
 import cloudmesh
-from cloudmesh_slurm.api.virtual_slurm_cluster import virtual_slurm_cluster
+from cloudmesh_slurm.api.virtual_slurm import virtual_slurm
 
 log = LOGGER(__file__)
 
