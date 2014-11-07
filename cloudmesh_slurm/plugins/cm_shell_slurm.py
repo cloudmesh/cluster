@@ -10,7 +10,7 @@ class cm_shell_slurm:
     """Creating a virtual slurm cluster"""
 
     def activate_cm_shell_slurm(self):
-        self.register_command_topic('cloud', 'slurm')
+        self.register_command_topic('platform', 'slurm')
         pass
 
     @command
