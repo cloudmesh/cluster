@@ -8,7 +8,7 @@ class VirtualSlurm(Document):
     cloud = StringField()
     image = StringField()
     flavor = StringField()
-    servers = ListField(StrinField())
-    ips = ListField(StrinField())
+    servers = ListField(StringField())
+    ips = ListField(StringField())
     meta = {'allow_inheritance': True}
     get_mongo_db("cloudmesh", DBConnFactory.TYPE_MONGOENGINE)
