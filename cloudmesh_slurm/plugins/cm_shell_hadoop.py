@@ -1,7 +1,7 @@
 from cmd3.shell import command
 from cloudmesh_common.logger import LOGGER
 import cloudmesh
-# from cloudmesh_slurm.api.virtual_hadoop import virtual_hadoop
+from cloudmesh_slurm.api.virtual_hadoop import virtual_hadoop
 
 log = LOGGER(__file__)
 
@@ -38,8 +38,8 @@ class cm_shell_hadoop:
         if (arguments["create"] and
             arguments["NAME"] and
             arguments["DATANODES"]):
-            # virtual_hadoop().create("{NAME}".format(**arguments),
-            #                         "{DATANODES}".format(**arguments))
+            virtual_hadoop().create("{NAME}".format(**arguments),
+                                    "{DATANODES}".format(**arguments))
             return
 
         return
