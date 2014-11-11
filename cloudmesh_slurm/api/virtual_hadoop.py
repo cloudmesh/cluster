@@ -47,3 +47,26 @@ class virtual_hadoop:
                 pass
         
         return
+    def DeployHadoop(self, name, cloud):
+        print("Attempting to deploy hadoop on cluster"
+              " group {0}".format(name))
+        
+        # Check if groupname is valid
+        nodecount = 0
+        for serverid in mesh.servers(clouds=[cloud],
+                                     cm_user_id=username)[cloud].keys():
+            server =  mesh.servers(clouds=[cloud],
+                                   cm_user_id=username)[cloud][serverid]
+            try:
+                if server["metadata"]["cm_group"] == name:
+                    # print("Group Name {0} already exits".format(name))
+                    nodecount += 1
+            except:
+                pass
+        if nodecount < 2:
+            print("Warning:Group name does not exist or group has"
+                  " less than 2 VMs")
+            return
+        print("deploy hadoop")
+        return
+

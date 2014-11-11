@@ -19,12 +19,13 @@ class cm_shell_hadoop:
         Usage:
             hadoop create GROUPNAME DATANODES
             hadoop info [GROUPNAME]
+            hadoop deploy GROUPNAME
 
         Manages a hadoop cluster on a cloud
 
         Arguments:
 
-          NAME       The name of the hadoop cluster
+          GROUPNAME  The name of the hadoop cluster
           DATANODES  The number of datanodes in the hadoop cluster
 
 
@@ -35,11 +36,17 @@ class cm_shell_hadoop:
         """
         log.info(arguments)
 
-        if (arguments["create"] and
+        if(arguments["create"] and
             arguments["GROUPNAME"] and
             arguments["DATANODES"]):
             virtual_hadoop().create("{GROUPNAME}".format(**arguments),
-                                    "{DATANODES}".format(**arguments),"india")
+                                    "{DATANODES}".format(**arguments),
+                                    "india")
+            return
+        if(arguments["deploy"] and
+           arguments["GROUPNAME"]):
+            virtual_hadoop().DeployHadoop("{GROUPNAME}".format(**arguments),
+                                          "india")
             return
 
         return
