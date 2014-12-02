@@ -37,22 +37,14 @@ class virtual_hadoop:
                             "--ln=ubuntu".format(datanodes, name))
         #print(r)
         print("created");
-        #Store cluster details in db
-        for serverid in mesh.servers(clouds=[cloud],
-                                     cm_user_id=username)[cloud].keys():
-            server =  mesh.servers(clouds=[cloud],
-                                   cm_user_id=username)[cloud][serverid]
-            try:
-                if server["metadata"]["cm_group"] == name:
-                    print(server['addresses']['private'].pop(1)['addr'])
-            except:
-                pass
+        #deploy hadoop on cluster
+        DeployHadoop(name,cloud)
+        
         
         return
     def DeployHadoop(self, name, cloud):
         print("Attempting to deploy hadoop on cluster"
               " group {0}".format(name))
-        call(["pwd"])
         
         # Check if groupname is valid
         nodecount = 0
