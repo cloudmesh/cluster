@@ -21,7 +21,7 @@ class virtual_hadoop:
             try:
                 if server["metadata"]["cm_group"] == name:
                     print("Group Name {0} already exits".format(name))
-                    #return
+                    return
             except:
                 pass
         #create a virtual cluster
@@ -71,5 +71,25 @@ class virtual_hadoop:
                   " less than 2 VMs")
             return
         print("deploy hadoop")
+        for serverid in mesh.servers(clouds=[cloud],
+                                     cm_user_id=username)[cloud].keys():
+            server =  mesh.servers(clouds=[cloud],
+                                   cm_user_id=username)[cloud][serverid]
+            try:
+                if server["metadata"]["cm_group"] == name:
+                    ip=server['addresses']['private'].pop(1)['addr']
+                    print(ip)
+                    call(["scp","hadoop/hadoop-chef.sh", 
+                          "ubuntu@{0}:hadoop".format(ip)])
+                    print("installing hadoop  on {0}".format(ip))
+                    mesh.ssh_execute(ipaddr=ip, command="chmod +x hadoop")
+                    mesh.ssh_execute(ipaddr=ip, command="sudo cp "
+                                     "hadoop /usr/bin/")
+                    mesh.ssh_execute(ipaddr=ip, command="sudo hadoop")
+                    mesh.ssh_execute(ipaddr=ip, command="sudo rm "
+                                     "/usr/bin/hadoop")
+                    mesh.ssh_execute(ipaddr=ip, command="sudo rm hadoop")
+            except:
+                pass
         return
 
