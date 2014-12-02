@@ -2,6 +2,7 @@ from __future__ import print_function
 import cloudmesh
 from cloudmesh_common.logger import LOGGER
 from cloudmesh_slurm.api.hadoop_instance import VirtualHadoop
+from subprocess import call
 
 log = LOGGER(__file__)
 mesh = cloudmesh.mesh("mongo")
@@ -31,10 +32,11 @@ class virtual_hadoop:
             return
         nodes = nodes + 1
         print("creating a cluster with {0} nodes".format(str(nodes)))
-        # r = cloudmesh.shell("cluster create --count={0}"
-        #                    "--group={1} "
-        #                    "--ln=ubuntu".format(datanodes, name))
+        r = cloudmesh.shell("cluster create --count={0}"
+                            "--group={1} "
+                            "--ln=ubuntu".format(datanodes, name))
         #print(r)
+        print("created");
         #Store cluster details in db
         for serverid in mesh.servers(clouds=[cloud],
                                      cm_user_id=username)[cloud].keys():
@@ -50,6 +52,7 @@ class virtual_hadoop:
     def DeployHadoop(self, name, cloud):
         print("Attempting to deploy hadoop on cluster"
               " group {0}".format(name))
+        call(["pwd"])
         
         # Check if groupname is valid
         nodecount = 0

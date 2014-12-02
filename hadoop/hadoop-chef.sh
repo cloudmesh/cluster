@@ -1,5 +1,7 @@
-sudo curl -L https://www.opscode.com/chef/install.sh | bash
-sudo wget http://github.com/opscode/chef-repo/tarball/master
+#!/bin/bash
+cd /home/ubuntu/
+curl -L https://www.opscode.com/chef/install.sh | bash
+wget http://github.com/opscode/chef-repo/tarball/master
 tar -zxf master
 mv opscode-chef-repo* chef-repo
 rm master
