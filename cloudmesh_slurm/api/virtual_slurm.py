@@ -72,8 +72,8 @@ class virtual_slurm:
                     ip=server['addresses']['private'].pop(1)['addr']
                     print(ip)
                     print("installing slurm  on {0}".format(ip))
-                    mesh.ssh_execute(ipaddr=ip, command="sudo apt-get "
-                                     "install slurm-llnl")
+                    mesh.ssh_execute(ipaddr=ip, command="echo -e 'Y' |sudo "
+                                     "apt-get install slurm-llnl")
                     
             except:
                 pass
