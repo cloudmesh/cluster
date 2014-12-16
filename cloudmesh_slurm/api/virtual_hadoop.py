@@ -38,7 +38,7 @@ class virtual_hadoop:
         #print(r)
         print("created");
         #deploy hadoop on cluster
-        DeployHadoop(name,cloud)
+        #DeployHadoop(name,cloud)
         
         
         return

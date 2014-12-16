@@ -67,15 +67,22 @@ class virtual_slurm:
                                      cm_user_id=username)[cloud].keys():
             server =  mesh.servers(clouds=[cloud],
                                    cm_user_id=username)[cloud][serverid]
+            max =0.0
             try:
                 if server["metadata"]["cm_group"] == name:
                     ip=server['addresses']['private'].pop(1)['addr']
                     print(ip)
+                    if(ip>max):
+                        max = ip
                     print("installing slurm  on {0}".format(ip))
-                    mesh.ssh_execute(ipaddr=ip, command="echo -e 'Y' |sudo "
-                                     "apt-get install slurm-llnl")
+                    #mesh.ssh_execute(ipaddr=ip, command="echo -e 'Y' |sudo "
+                    #                 "apt-get install slurm-llnl")
                     
             except:
                 pass
+        f = open("slurm/test","w")
+        f.write("hello")
+        f.close()
+        print(max)
         return
 
