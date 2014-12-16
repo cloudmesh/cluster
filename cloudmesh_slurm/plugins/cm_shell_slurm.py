@@ -17,16 +17,16 @@ class cm_shell_slurm:
     def do_slurm(self, args, arguments):
         """
         Usage:
-            slurm create GROUPNAME DATANODES
             slurm info [GROUPNAME]
-            slurm deploy GROUPNAME
+            slurm deploy GROUPNAME LOGINNAME
+            slurm delete GROUPNAME
 
         Manages a slurm cluster on a cloud
 
         Arguments:
 
           GROUPNAME  The name of the slurm cluster
-          DATANODES  The number of datanodes in the slurm cluster
+          
 
 
         Options:
@@ -36,17 +36,23 @@ class cm_shell_slurm:
         """
         log.info(arguments)
 
-        if(arguments["create"] and
-            arguments["GROUPNAME"] and
-            arguments["DATANODES"]):
-            virtual_slurm().create("{GROUPNAME}".format(**arguments),
-                                    "{DATANODES}".format(**arguments),
-                                    "india")
-            return
+        # if(arguments["create"] and
+        #    arguments["GROUPNAME"] and
+        #    arguments["DATANODES"]):
+        #    virtual_slurm().create("{GROUPNAME}".format(**arguments),
+        #                            "{DATANODES}".format(**arguments),
+        #                            "india")
+        #    return
         if(arguments["deploy"] and
-           arguments["GROUPNAME"]):
+           arguments["GROUPNAME"] and
+           arguments["LOGINNAME"]):
             virtual_slurm().DeploySlurm("{GROUPNAME}".format(**arguments),
+                                        "{LOGINNAME}".format(**arguments),
                                           "india")
             return
-
+        if(arguments["delete"] and
+           arguments["GROUPNAME"]):
+            virtual_slurm().Delete("{GROUPNAME}".format(**arguments),
+                                          "india")
+            return
         return
