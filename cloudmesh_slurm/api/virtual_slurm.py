@@ -78,29 +78,69 @@ class virtual_slurm:
             return
         print("deploy slurm")
         ip = ""
+        mastername = ""
         for serverid in mesh.servers(clouds=[cloud],
                                      cm_user_id=username)[cloud].keys():
             server =  mesh.servers(clouds=[cloud],
                                    cm_user_id=username)[cloud][serverid]
-        
+            
             try:
                 if server["metadata"]["cm_group"] == name:
                     ip=server['addresses']['private'].pop(1)['addr']
                     #print(ip)
                     print("installing slurm  on {0}".format(ip))
+                    mastername = server["name"].replace("_","-")
                     mesh.ssh_execute(ipaddr=ip, command="echo -e 'Y' |sudo "
                                      "apt-get install slurm-llnl")
                     
             except:
                 pass
         VirtualSlurm(user=username,group=name,ln=login,masterip=ip).save()
-        for myslurm in VirtualSlurm.objects(user=username):
-            print(myslurm.masterip)
+        # for myslurm in VirtualSlurm.objects(user=username):
+        #    print(myslurm.masterip)
         template = open("slurm/slurm.conf.template","r")
-        temp = template.read()
+        temp = template.read().format(mastername,ip,login)
+        masterip = ip
         template.close()
         conf = open("slurm/slurm.conf","w")
         conf.write(temp)
         conf.close()
+
+        conf = open("slurm/slurm.conf","a")
+        nodes = ""
+        for serverid in mesh.servers(clouds=[cloud],
+                                     cm_user_id=username)[cloud].keys():
+            server =  mesh.servers(clouds=[cloud],
+                                   cm_user_id=username)[cloud][serverid]
+            
+            try:
+                if server["metadata"]["cm_group"] == name:
+                    ip=server['addresses']['private'].pop(1)['addr']
+                    if ip != masterip:
+                        worker = "NodeName={0} NodeAddr={1}\n"
+                        worker = worker.format(server["name"].replace("_","-"),
+                                               ip)
+                        conf.write(worker)
+                        nodes = nodes + server["name"].replace("_","-") + ","
+                        w = "{0}@{1}:".format(login,ip)
+                        call(["scp","slurm/slurmworker",w])
+                        mesh.ssh_execute(ipaddr=ip, command="sudo cp"
+                                         "slurmworker /usr/bin/")
+                    else:                 
+                        w = "{0}@{1}:".format(login,masterip)
+                        call(["scp","slurm/slurmmaster",w])
+                        mesh.ssh_execute(ipaddr=masterip, command="sudo cp"
+                                         "slurmmaster /usr/bin/")
+                        mesh.ssh_execute(ipaddr=masterip, command="sudo "
+                                         "slurmmaster")
+            except:
+                pass
+        nodes = nodes[:-1]
+        nodes = "PartitionName=debug Nodes=" + nodes
+        nodes = nodes + " Default=YES MaxTime=INFINITE State=UP\n"
+        conf.write(nodes)
+        conf.write("\n")
+        conf.close()
         return
 
+    
