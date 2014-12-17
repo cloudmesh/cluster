@@ -1,0 +1,30 @@
+#!/bin/bash
+sudo cp /home/$1/munge.key /etc/munge/
+sudo chmod 700 /etc/munge/
+sudo chmod 711 /var/lib/munge/
+sudo chmod 700 /var/log/munge/
+sudo mkdir /run/munge
+sudo chmod 755 /var/run/munge/
+sudo chmod 700 /var/log
+sudo chown 1000 /var/log/munge
+sudo chown 1000 /var/log
+sudo chown 1000 /run/munge/
+sudo chown 1000 /var/lib/munge
+sudo chown 1000 /etc/munge/munge.key 
+sudo chown 1000 /etc/munge
+/usr/sbin/munged
+sudo echo "" >/var/log/slurm-llnl/slurmctld.log
+sudo echo "" >/var/log/slurm-llnl/slurmd.log
+sudo chown 1000 /var/log/slurm-llnl/slurmctld.log
+sudo chown 1000 /var/log/slurm-llnl/
+sudo chown 1000 /var/log/slurm-llnl/slurmd.log
+sudo chown 1000 /var/run
+sudo chown 1000 /var/spool
+sudo chown 1000 /var/lib/slurm-llnl
+sudo chown 1000 /var/lib/slurm-llnl/slurmctld
+sudo chmod 700 /var/log
+sudo chmod 700 /var/lib/munge
+sudo chmod 755 /run/munge/
+sudo /usr/sbin/ntpdate ntp2.ja.net
+sudo /etc/init.d/slurm-llnl start
+
