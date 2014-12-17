@@ -4,10 +4,10 @@ default_attributes(
   "hadoop" => {
     "distribution" => "bigtop",
     "core_site" => {
-      "fs.defaultFS" => "hdfs://hadoop1"
+      "fs.defaultFS" => "hdfs://{0}"
     },
     "yarn_site" => {
-      "yarn.resourcemanager.hostname" => "hadoop1"
+      "yarn.resourcemanager.hostname" => "{0}"
     }
   }
 )

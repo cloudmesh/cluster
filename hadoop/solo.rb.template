@@ -1,0 +1,4 @@
+file_cache_path "/home/{0}/chef-solo"
+cookbook_path "/home/{0}/chef-repo/cookbooks"
+role_path "/home/{0}/chef-repo/roles"
+verify_api_cert true

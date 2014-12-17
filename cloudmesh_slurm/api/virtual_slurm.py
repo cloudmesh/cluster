@@ -45,6 +45,13 @@ class virtual_slurm:
         
         return
 
+    def Info(self,name):
+        for myslurm in VirtualSlurm.objects(user=username,group=name):
+            print("master is {0} \n".format(myslurm.masterip))
+            r = mesh.ssh_execute(ipaddr=myslurm.masterip, command="sinfo")
+            print(r)
+        return
+
     def Delete(self,name,cloud):
         for myslurm in VirtualSlurm.objects(user=username,group=name):
             print("deleted {0}".format(name))
@@ -124,15 +131,39 @@ class virtual_slurm:
                         nodes = nodes + server["name"].replace("_","-") + ","
                         w = "{0}@{1}:".format(login,ip)
                         call(["scp","slurm/slurmworker",w])
+                        mesh.ssh_execute(ipaddr=ip, command="sudo chmod +x"
+                                         " slurmworker")
                         mesh.ssh_execute(ipaddr=ip, command="sudo cp"
-                                         "slurmworker /usr/bin/")
+                                         " slurmworker /usr/bin/")
+                        call(["scp","slurm/slurmworker2",w])
+                        mesh.ssh_execute(ipaddr=ip, command="sudo chmod +x"
+                                         " slurmworker2")
+                        mesh.ssh_execute(ipaddr=ip, command="sudo cp"
+                                         " slurmworker2 /usr/bin/")
                     else:                 
                         w = "{0}@{1}:".format(login,masterip)
                         call(["scp","slurm/slurmmaster",w])
-                        mesh.ssh_execute(ipaddr=masterip, command="sudo cp"
-                                         "slurmmaster /usr/bin/")
+                        call(["scp","slurm/slurmmaster2",w])
                         mesh.ssh_execute(ipaddr=masterip, command="sudo "
-                                         "slurmmaster")
+                                         " chmod +x slurmmaster")
+                        print("here1")
+                        mesh.ssh_execute(ipaddr=masterip, command="sudo "
+                                         " chmod +x slurmmaster2")
+                        mesh.ssh_execute(ipaddr=masterip, command="sudo cp"
+                                         " slurmmaster /usr/bin/")
+                        mesh.ssh_execute(ipaddr=masterip, command="sudo cp"
+                                         " slurmmaster2 /usr/bin/")
+                        print("here2")
+                        mesh.ssh_execute(ipaddr=masterip, command="echo -e "
+                                         "'N' |sudo slurmmaster")
+                        print("here3")
+                        mesh.ssh_execute(ipaddr=masterip, command=" "
+                                         "/etc/init.d/munge start")
+                        
+                        # mesh.ssh_execute(ipaddr=masterip, command="sudo "
+                        #                  "cp /etc/munge/munge.key 
+                        print("here4")
+                        call(["scp",w+"/etc/munge/munge.key","slurm/"+name])
             except:
                 pass
         nodes = nodes[:-1]
@@ -141,6 +172,35 @@ class virtual_slurm:
         conf.write(nodes)
         conf.write("\n")
         conf.close()
+        for serverid in mesh.servers(clouds=[cloud],
+                                     cm_user_id=username)[cloud].keys():
+            server =  mesh.servers(clouds=[cloud],
+                                   cm_user_id=username)[cloud][serverid]
+            
+            try:
+                if server["metadata"]["cm_group"] == name:
+                    ip=server['addresses']['private'].pop(1)['addr']
+                    if ip != masterip:
+                        w = "{0}@{1}:".format(login,ip)
+                        call(["scp","slurm/slurm.conf",w])
+                        call(["scp","slurm/"+name,w+"munge.key"])
+                        mesh.ssh_execute(ipaddr=ip, command="sudo cp"
+                                         " munge.key /etc/munge/")
+                        mesh.ssh_execute(ipaddr=ip, command="sudo "
+                                         "slurmworker ")
+                        mesh.ssh_execute(ipaddr=ip, command=" "
+                                         "/etc/init.d/munge start")
+                        mesh.ssh_execute(ipaddr=ip, command="sudo cp"
+                                         " slurm.conf /etc/slurm-llnl/")
+                        mesh.ssh_execute(ipaddr=ip, command="sudo "
+                                         "slurmworker2 ")
+                    else:
+                        w = "{0}@{1}:".format(login,masterip)
+                        call(["scp","slurm/slurm.conf",w])
+                        mesh.ssh_execute(ipaddr=masterip, command="sudo cp"
+                                         " slurm.conf /etc/slurm-llnl/")
+                        mesh.ssh_execute(ipaddr=masterip, command="sudo "
+                                         "slurmmaster2")
+            except:
+                pass
         return
-
-    

@@ -17,7 +17,7 @@ class cm_shell_slurm:
     def do_slurm(self, args, arguments):
         """
         Usage:
-            slurm info [GROUPNAME]
+            slurm info GROUPNAME
             slurm deploy GROUPNAME LOGINNAME
             slurm delete GROUPNAME
 
@@ -54,5 +54,9 @@ class cm_shell_slurm:
            arguments["GROUPNAME"]):
             virtual_slurm().Delete("{GROUPNAME}".format(**arguments),
                                           "india")
+            return
+        if(arguments["info"] and
+           arguments["GROUPNAME"]):
+            virtual_slurm().Info("{GROUPNAME}".format(**arguments))
             return
         return

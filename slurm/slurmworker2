@@ -1,0 +1,16 @@
+#!/bin/bash
+sudo echo "" >/var/log/slurm-llnl/slurmctld.log
+sudo echo "" >/var/log/slurm-llnl/slurmd.log
+sudo chown 1000 /var/log/slurm-llnl/slurmctld.log
+sudo chown 1000 /var/log/slurm-llnl/
+sudo chown 1000 /var/log/slurm-llnl/slurmd.log
+sudo chown 1000 /var/run
+sudo chown 1000 /var/spool
+sudo chown 1000 /var/lib/slurm-llnl
+sudo chown 1000 /var/lib/slurm-llnl/slurmctld
+sudo chmod 700 /var/log
+sudo chmod 700 /var/lib/munge
+sudo chmod 755 /run/munge/
+sudo /usr/sbin/ntpdate ntp2.ja.net
+sudo /etc/init.d/slurm-llnl start
+
