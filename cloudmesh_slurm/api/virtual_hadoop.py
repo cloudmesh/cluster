@@ -165,8 +165,8 @@ class virtual_hadoop:
                                          "manager.json chef-repo/")
                         mesh.ssh_execute(ipaddr=mip, command="sudo chef-solo "
                                          "-j manager.json -c solo.rb")
-                        mesh.ssh_execute(ipaddr=mip, command="sudo "
-                                         "/etc/init.d/"
+                        mesh.ssh_execute(ipaddr=mip, command="echo -e 'Y' |"
+                                         "sudo /etc/init.d/"
                                          "hadoop-hdfs-namenode init")
                         
                         mesh.ssh_execute(ipaddr=mip, command="sudo "
