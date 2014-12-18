@@ -9,7 +9,7 @@ For testing instructions please see:
 **Introduction**
 Slurm is a workload manager used in clusters and supercomputers.
 For detailed documentaation on slurm please see:
-*http://slurm.schedmd.com/
+* http://slurm.schedmd.com/
 
 Virtual Slurm is a tool to help manage slurm deployment in cloudmesh
 This project also includes installation of hadoop
@@ -22,26 +22,26 @@ The following commands are added to cloudmesh on setting up this project
 
 The Slurm command gives the following options:
 
-*slurm info GROUPNAME
+* slurm info GROUPNAME
 	This command displays the IP of master node and state of worker nodes
-*slurm deploy GROUPNAME LOGINNAME
+* slurm deploy GROUPNAME LOGINNAME
 	This command can be used to deploy slurm in a group (Specify the login name used to create the group)
-*slurm delete GROUPNAME
+* slurm delete GROUPNAME
 	This command can be used to delete a group form the database
 	note: This does not delete the actual cluster, it just deletes its entries in database
 
 The hadoop command give the following options:
-*hadoop info GROUPNAME
+* hadoop info GROUPNAME
 	This command displays the IP of master node
-*hadoop deploy GROUPNAME LOGINNAME
+* hadoop deploy GROUPNAME LOGINNAME
 	This command can be used to deploy slurm in a group (Specify the login name used to create the group)
-*hadoop delete GROUPNAME
+* hadoop delete GROUPNAME
 	This command can be used to delete a group form the database
 	note: This does not delete the actual cluster, it just deletes its entries in database
 
 **Future Scope**
 =============
-*This project has the scope using the checkpoint feature of slurm to store the cluster and restart it at any point
+* This project has the scope using the checkpoint feature of slurm to store the cluster and restart it at any point
 
 **Known Bugs to be fixed**
 =============
