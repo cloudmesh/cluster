@@ -2,6 +2,7 @@ Prerequisites
 =============
 
 This project assumes you have a working cloudmesh setup and can create and delete virtual machines.
+This project assumes you are using india as your cloud
 
 Setup
 =============
