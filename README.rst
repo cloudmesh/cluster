@@ -20,6 +20,7 @@ The following commands are added to cloudmesh on setting up this project
 *hadoop
 
 The Slurm command gives the following options:
+
 *slurm info GROUPNAME
 	This command displays the IP of master node and state of worker nodes
 *slurm deploy GROUPNAME LOGINNAME
@@ -41,6 +42,6 @@ The hadoop command give the following options:
 *This project has the scope using the checkpoint feature of slurm to store the cluster and restart it at any point
 
 **Known Bugs to be fixed**
-*Cloudmesh stores VM server names with an _ in the end, for example user_1, 
+Cloudmesh stores VM server names with an _ in the end, for example user_1, 
 but the hostname is infact stored with a -, for example user-1. Hostname is essential for slurm deployment.
 If a user name has an underscore,  for example user_name, then this could cause problems in slurm deployment
