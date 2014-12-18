@@ -1,4 +1,5 @@
 **Virtual Slurm**
+=============
 
 For Installation instructions please see:
 * ss
@@ -31,6 +32,7 @@ The Slurm command gives the following options:
 	note: This does not delete the actual cluster, it just deletes its entries in database
 
 The hadoop command give the following options:
+
 * hadoop info GROUPNAME
 	This command displays the IP of master node
 * hadoop deploy GROUPNAME LOGINNAME
