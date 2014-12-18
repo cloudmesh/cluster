@@ -3,11 +3,11 @@
 
 For Installation instructions please see:
 
-* ss
+* https://github.com/cloudmesh/cluster/blob/master/Installation.rst
 
 For testing instructions please see:
 
-* ss
+* https://github.com/cloudmesh/cluster/blob/master/Test.rst
 
 **Introduction**
 
