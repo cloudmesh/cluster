@@ -51,6 +51,4 @@ The hadoop command give the following options:
 
 **Known Bugs to be fixed**
 =============
-Cloudmesh stores VM server names with an _ in the end, for example user_1, 
-but the hostname is infact stored with a -, for example user-1. Hostname is essential for slurm deployment.
-If a user name has an underscore,  for example user_name, then this could cause problems in slurm deployment
+* Cloudmesh stores VM server names with an _ in the end, for example user_1, but the hostname is infact stored with a -, for example user-1. Hostname is essential for slurm deployment. If a user name has an underscore,  for example user_name, then this could cause problems in slurm deployment
