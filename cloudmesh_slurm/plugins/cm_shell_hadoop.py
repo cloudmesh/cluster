@@ -17,9 +17,9 @@ class cm_shell_hadoop:
     def do_hadoop(self, args, arguments):
         """
         Usage:
-            hadoop create GROUPNAME DATANODES
-            hadoop info [GROUPNAME]
-            hadoop deploy GROUPNAME
+            hadoop info GROUPNAME
+            hadoop deploy GROUPNAME LOGINNAME
+            hadoop delete GROUPNAME
 
         Manages a hadoop cluster on a cloud
 
@@ -36,17 +36,21 @@ class cm_shell_hadoop:
         """
         log.info(arguments)
 
-        if(arguments["create"] and
-            arguments["GROUPNAME"] and
-            arguments["DATANODES"]):
-            virtual_hadoop().create("{GROUPNAME}".format(**arguments),
-                                    "{DATANODES}".format(**arguments),
-                                    "india")
-            return
+        
         if(arguments["deploy"] and
-           arguments["GROUPNAME"]):
+           arguments["GROUPNAME"] and
+           arguments["LOGINNAME"]):
             virtual_hadoop().DeployHadoop("{GROUPNAME}".format(**arguments),
+                                          "{LOGINNAME}".format(**arguments),
                                           "india")
             return
-
+        if(arguments["info"] and
+           arguments["GROUPNAME"]):
+            virtual_hadoop().Info("{GROUPNAME}".format(**arguments))
+            return
+        if(arguments["delete"] and
+           arguments["GROUPNAME"]):
+            virtual_hadoop().Delete("{GROUPNAME}".format(**arguments),
+                                          "india")
+            return
         return

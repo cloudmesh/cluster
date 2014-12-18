@@ -3,9 +3,8 @@ from mongoengine import *
 
 class VirtualHadoop(Document):
     user = StringField(required=True)
-    groupname = StringField(required=True)
-    nodes = IntField()
-    managerip = StringField()
-    workerips = ListField(StringField())
+    group = StringField(required=True)
+    ln = StringField(required=True)
+    masterip = StringField()
     meta = {'allow_inheritance': True}
     get_mongo_db("cloudmesh", DBConnFactory.TYPE_MONGOENGINE)

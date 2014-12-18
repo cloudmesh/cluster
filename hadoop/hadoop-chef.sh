@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/
+cd /home/$1/
 curl -L https://www.opscode.com/chef/install.sh | bash
 wget http://github.com/opscode/chef-repo/tarball/master
 tar -zxf master
