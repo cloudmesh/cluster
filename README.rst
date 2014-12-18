@@ -2,14 +2,18 @@
 =============
 
 For Installation instructions please see:
+
 * ss
 
 For testing instructions please see:
+
 * ss
 
 **Introduction**
+
 Slurm is a workload manager used in clusters and supercomputers.
 For detailed documentaation on slurm please see:
+
 * http://slurm.schedmd.com/
 
 Virtual Slurm is a tool to help manage slurm deployment in cloudmesh
