@@ -20,7 +20,7 @@ The following commands are added to cloudmesh on setting up this project
 *hadoop
 
 The Slurm command gives the following options:
-*slurm info GROUPNAME
+* slurm info GROUPNAME
 	This command displays the IP of master node and state of worker nodes
 *slurm deploy GROUPNAME LOGINNAME
 	This command can be used to deploy slurm in a group (Specify the login name used to create the group)
