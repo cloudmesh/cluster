@@ -49,6 +49,7 @@ The hadoop command give the following options:
 =============
 * This project has the scope using the checkpoint feature of slurm to store the cluster and restart it at any point
 * Extend the project to clouds other than india
+* Complete hadoop cluster part of project
 
 **Known Bugs to be fixed**
 =============
