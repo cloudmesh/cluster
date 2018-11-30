@@ -1,15 +1,5 @@
 # Virtual Slurm
 
-For Installation instructions please see:
-
-* https://github.com/cloudmesh/cluster/blob/master/Installation.rst
-
-For testing instructions please see:
-
-* https://github.com/cloudmesh/cluster/blob/master/Test.rst
-
-## Introduction
-
 Slurm is a workload manager used in clusters and supercomputers.
 For detailed documentaation on slurm please see:
 
@@ -66,5 +56,11 @@ This project assumes you are using india as your cloud
 * Place it in the same folder as your cloudmesh folder (beside it not inside it)
 * cd to the cluster folder
 * install the setup with the command: python setup.py install
+
+### Testing
+
+For testing instructions please see:
+
+* https://github.com/cloudmesh/cluster/blob/master/Test.rst
 
 
