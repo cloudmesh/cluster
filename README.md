@@ -16,23 +16,33 @@ The following commands are added to cloudmesh on setting up this project
 
 The Slurm command gives the following options:
 
-* slurm info GROUPNAME
-	This command displays the IP of master node and state of worker nodes
-* slurm deploy GROUPNAME LOGINNAME
-	This command can be used to deploy slurm in a group (Specify the login name used to create the group)
-* slurm delete GROUPNAME
-	This command can be used to delete a group form the database
-	note: This does not delete the actual cluster, it just deletes its entries in database
+`slurm info GROUPNAME`
+
+*	This command displays the IP of master node and state of worker nodes
+
+`slurm deploy GROUPNAME LOGINNAME`
+
+*	This command can be used to deploy slurm in a group (Specify the login name used to create the group)
+
+`slurm delete GROUPNAME`
+
+* This command can be used to delete a group form the database
+  Note: This does not delete the actual cluster, it just deletes its entries in database
 
 The hadoop command give the following options:
 
-* hadoop info GROUPNAME
-	This command displays the IP of master node
-* hadoop deploy GROUPNAME LOGINNAME
-	This command can be used to deploy slurm in a group (Specify the login name used to create the group)
-* hadoop delete GROUPNAME
-	This command can be used to delete a group form the database
-	note: This does not delete the actual cluster, it just deletes its entries in database
+`hadoop info GROUPNAME`
+
+*	This command displays the IP of master node
+
+`hadoop deploy GROUPNAME LOGINNAME`
+
+*	This command can be used to deploy slurm in a group (Specify the login name used to create the group)
+
+`hadoop delete GROUPNAME`
+
+* This command can be used to delete a group form the database
+  note: This does not delete the actual cluster, it just deletes its entries in database
 
 ## Future Scope
 
